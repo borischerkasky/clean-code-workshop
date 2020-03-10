@@ -11,6 +11,7 @@ class Bank:
     def default_response():
         result = dict()
         result['warnings'] = []
+        result['response-info'] = None
         result['response'] = 'OK'
 
     # non information
@@ -31,6 +32,13 @@ class Bank:
                 for a2 in self.accounts:
                     if a2['id'] == yid:
                         a2['amount'] += how_much
+                        response['response-info'] = "moved " + how_much + " form " + a1['id'] + "to" + a2['id']
+
+        if response['response-info'] is None:
+            response['response'] = 'Error'
+
+        # always return status OK
+        return response
 
     # This method calculates the plan details for potential new Bank customers
     # Bank holds all plans in files on disk
