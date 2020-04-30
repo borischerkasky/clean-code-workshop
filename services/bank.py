@@ -14,16 +14,13 @@ class Bank:
         result['response-info'] = None
         result['response'] = 'OK'
 
-    # non information
     def move(self, yid, xid, how_much):
         response = self.default_response
 
-        # Command query separation
         for a1 in self.accounts:
             if a1['id'] == xid:
                 commission = self.calculate_commission(a1, how_much)
                 a1['amount'] -= (commission + how_much)
-                # boolean conditions as methods
                 if a1['amount'] < a1['balance-warning-level'] and a1['balance-warning-enabled']:
                     response['Warnings'].append('balance is closing to zero!!!')
                 a1['operations'] += 1
@@ -43,16 +40,13 @@ class Bank:
     # This method calculates the plan details for potential new Bank customers
     # Bank holds all plans in files on disk
     def plan_estimation(self, customer_name, expected_household_income):
-        # Be a newspaper
         plan_file_name = self.get_plan_file(expected_household_income)
         file = open(plan_file_name, "r")
         lines = file.readlines()
         file.close()
 
-        # variables can tell a story
         plan = CustomerPlan(lines[0], lines[1], lines[2], lines[3])
 
-        # compact switch cases
         if plan.name == "VIP":
             EmailService.send_email("manager@bank.co.il", "potential revenue")
             EmailService.send_email("manager@bank.co.il", "customer welcome email")
@@ -88,7 +82,6 @@ class Bank:
     @staticmethod
     def calculate_commission(account, how_much):
         is_fixed_type = account['commission-settings']['type'] == 'fixed'
-        # positive conditions
         if not is_fixed_type:
             value = account['commission-settings']['commission-value-percentage']
             if how_much < 1000:
