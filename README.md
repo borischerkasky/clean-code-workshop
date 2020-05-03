@@ -7,6 +7,7 @@ You are requested to read code of [bank.py](services/bank.py), and try and figur
 * account_details
 
 Was it easy to understand what does methods does? if NOT, try to think why? what made it hard for you to understand the code?
+**Please try and device a list of reasons why the code was hard to understand...**
 
 ### How to read the code?
 you can just read the code in github, there are only 4 files, and most of the code is in the [bank.py](services/bank.py) file.
